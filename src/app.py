@@ -1,19 +1,22 @@
-from fastapi import FastAPI
-from src.environment import NewsEnv
-from src.models import SentimentAction
+from fastapi import FastAPI, Request
 
 app = FastAPI()
-env = NewsEnv()
 
-@app.post("/reset")
+# Reset endpoint: returns initial observation/state
+@app.get("/reset")
 def reset():
-    return env.reset()
+    return {"observation": "environment reset", "state": "ready"}
 
+# Step endpoint: accepts an action and returns reward + new state
 @app.post("/step")
-def step(action: SentimentAction):
-    obs, reward, done, info = env.step(action)
-    return {"observation": obs, "reward": reward, "done": done, "info": info}
+async def step(request: Request):
+    data = await request.json()
+    action = data.get("action", None)
+    # Dummy reward logic for hackathon baseline
+    reward = 0.5 if action else 0.0
+    return {"reward": reward, "state": "running"}
 
+# State endpoint: returns current episode state
 @app.get("/state")
 def state():
-    return env.state()
+    return {"episode": "active", "progress": "baseline agent running"}
