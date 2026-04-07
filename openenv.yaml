@@ -1,0 +1,10 @@
+name: stock-news-impact-analyzer
+version: 1.0
+tasks:
+  - easy
+  - medium
+  - hard
+spec:
+  action: SentimentAction
+  observation: NewsObservation
+  state: EnvState
