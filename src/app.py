@@ -20,3 +20,7 @@ async def step(request: Request):
 @app.get("/state")
 def state():
     return {"episode": "active", "progress": "baseline agent running"}
+
+@app.get("/")
+def home():
+    return {"message": "Stock News Impact Analyzer API is running. Use /reset, /step, /state."}
