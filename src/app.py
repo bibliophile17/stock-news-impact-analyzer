@@ -61,6 +61,6 @@ with gr.Blocks() as demo:
     state_btn.click(fn=state_env, outputs=output)
     step_btn.click(fn=step_env, inputs=sentiment, outputs=output)
 
-# Launch Gradio on the same port Hugging Face expects
+# Launch Gradio on Hugging Face port
 if __name__ == "__main__":
     demo.launch(server_name="0.0.0.0", server_port=7860)
