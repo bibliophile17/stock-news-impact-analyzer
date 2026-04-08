@@ -5,5 +5,5 @@ WORKDIR /app
 COPY . /app
 RUN pip install fastapi uvicorn pydantic gradio
 
-CMD ["python", "src/app.py"]
+CMD ["python", "/app/src/app.py"]
 
