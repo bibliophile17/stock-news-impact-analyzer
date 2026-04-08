@@ -5,7 +5,9 @@ WORKDIR /app
 COPY . /app
 ENV PYTHONPATH=/app
 
-RUN pip install fastapi uvicorn pydantic gradio
+RUN pip install --no-cache-dir -r requirements.txt
 
+
+RUN pip install fastapi uvicorn pydantic gradio
 
 CMD ["python", "-m", "src.app"]
