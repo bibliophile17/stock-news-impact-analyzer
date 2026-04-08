@@ -1,28 +1,42 @@
 import os
-from src.environment import NewsEnv
-from src.models import SentimentAction
+import sys
+from openai import OpenAI
 
-# Mandatory environment variables
-API_BASE_URL = os.getenv("API_BASE_URL")
-MODEL_NAME = os.getenv("MODEL_NAME")
+# Required environment variables with defaults
+API_BASE_URL = os.getenv("API_BASE_URL", "https://api.openai.com/v1")
+MODEL_NAME = os.getenv("MODEL_NAME", "gpt-4o-mini")
 HF_TOKEN = os.getenv("HF_TOKEN")
 
-env = NewsEnv()
+if HF_TOKEN is None:
+    print("HF_TOKEN not set", file=sys.stderr)
+    sys.exit(1)
+
+# Initialize OpenAI client
+client = OpenAI(api_key=HF_TOKEN, base_url=API_BASE_URL)
 
 def main():
-    # START log
-    print("[START]")
-    obs = env.reset()
-    print(obs.model_dump())   # use model_dump instead of dict()
+    try:
+        # START
+        print("[START]")
+        obs = {"headline": "Company X reports record profits", "ticker": "COMPX"}
+        print(obs)
 
-    # STEP log
-    action = SentimentAction(sentiment="positive")
-    obs, reward, done, _ = env.step(action)
-    print("[STEP]")
-    print({"observation": obs.model_dump(), "reward": reward, "done": done})
+        # STEP
+        print("[STEP]")
+        # Example LLM call
+        response = client.chat.completions.create(
+            model=MODEL_NAME,
+            messages=[{"role": "user", "content": "Analyze sentiment: Company X reports record profits"}],
+        )
+        sentiment = response.choices[0].message.content
+        reward = 1.0 if "positive" in sentiment.lower() else 0.0
+        print({"observation": obs, "reward": reward, "done": True})
 
-    # END log
-    print("[END]")
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+    finally:
+        # END
+        print("[END]")
 
 if __name__ == "__main__":
     main()
