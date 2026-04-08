@@ -4,11 +4,9 @@ emoji: 📈
 colorFrom: blue
 colorTo: green
 sdk: docker
-app_file: inference.py
+sdk_version: "1.0.0"
+python_version: "3.10"
+app_file: src/app.py
 pinned: false
 license: mit
 ---
-
-# Stock News Impact Analyzer
-
-This Space analyzes the impact of stock-related news using NLP models and provides insights.
