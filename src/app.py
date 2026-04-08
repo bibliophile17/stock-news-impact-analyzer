@@ -1,7 +1,9 @@
 from fastapi import FastAPI
-from src.environment import NewsEnv
-from src.models import SentimentAction
+
 import gradio as gr
+from .environment import NewsEnv
+from .models import SentimentAction
+
 
 # Initialize FastAPI and environment
 app = FastAPI()
