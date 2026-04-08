@@ -7,8 +7,14 @@ dependencies = [
     "fastapi",
     "uvicorn",
     "pydantic",
-    "gradio"
+    "gradio",
+    "openenv-core>=0.2.0"
 ]
+
+
+[project.scripts]
+server = "server.app:main"
+
 
 [build-system]
 requires = ["setuptools", "wheel"]
