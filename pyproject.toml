@@ -1,0 +1,15 @@
+[project]
+name = "stock-news-impact-analyzer"
+version = "0.1.0"
+description = "OpenEnv Hackathon project: Stock News Impact Analyzer"
+authors = [{ name = "SS" }]
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "pydantic",
+    "gradio"
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
