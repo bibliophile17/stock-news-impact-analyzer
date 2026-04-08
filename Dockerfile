@@ -3,7 +3,9 @@
 FROM python:3.10-slim
 WORKDIR /app
 COPY . /app
+ENV PYTHONPATH=/app
+
 RUN pip install fastapi uvicorn pydantic gradio
 
-CMD ["python", "/app/src/app.py"]
 
+CMD ["python", "-m", "src.app"]
