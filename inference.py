@@ -23,7 +23,6 @@ def main():
 
         # STEP
         print("[STEP]")
-        # Example LLM call
         response = client.chat.completions.create(
             model=MODEL_NAME,
             messages=[{"role": "user", "content": "Analyze sentiment: Company X reports record profits"}],
